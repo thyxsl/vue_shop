@@ -64,7 +64,10 @@ export default {
       this.$refs.loginFormRef.validate( async valid => {
         if(!valid) return;
         const {data: res} = await this.$http.post("login",  this.loginForm);
-        if(res.status !== 200)   this.$message.error("登陆失败")
+        if(res.status !== 200){
+          this.$message.error("登陆失败")
+          return
+        }   
         this.$message.success("登陆成功")
         // 登陆成功 保存token
         window.sessionStorage.setItem('token', res.token)
